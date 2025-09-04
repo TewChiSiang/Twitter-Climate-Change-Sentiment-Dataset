@@ -1,0 +1,55 @@
+Project Report: Social Media Sentiment Analysis for Social Impact
+Project Title: 
+
+1) Project objectives and chosen social impact domain
+- Domain: Climate change awareness and public discourse.
+- Objective: Analyze 43,943 climate change–related tweets (Apr 2015–Feb 2018) to understand sentiment distribution (Anti, Neutral, Pro, News), identify dominant themes and patterns in language use, and surface actionable insights that can inform communication strategies, counter misinformation, and support targeted outreach.
+- Outcomes: Produce a reproducible pipeline that loads and cleans data, performs sentiment and theme analysis, generates static and interactive visualizations, and exports reports (TXT, CSV, JSON) for stakeholders.
+
+2) Explanation of data cleaning, sentiment analysis, and visualisation techniques
+Data cleaning (data_loader.py)
+- Ingestion: CSV loaded with robust error handling (missing/empty/parse errors logged).
+- Normalization: Column names lowercased/trimmed; message text cast to string and stripped.
+- De-duplication: Duplicates removed by tweetid to reduce bias from repeated content.
+- Filtering: Empty messages removed to ensure meaningful analysis.
+- Feature engineering:
+  - sentiment_label mapped from sentiment {-1: Anti, 0: Neutral, 1: Pro, 2: News}.
+  - text_length (character count) and word_count added for descriptive statistics.
+  - binary_sentiment derived for coarse-grained views (Positive/Negative/Neutral).
+
+Sentiment and text analysis (sentiment_analyzer.py)
+- Sentiment distribution: Value counts by numeric code and human-readable label, with percentages and a sentiment_balance summary (pro_climate, anti_climate, neutral).
+- Theme identification: Tokenization with punctuation removal and simple stop-word filtering; frequency counts for top themes overall and per sentiment category; extraction of climate-related terms via keyword list matching.
+- Text patterns: Descriptive stats for text_length and word_count globally and by sentiment; counts of retweets, mentions, hashtags, and URLs to understand engagement patterns and content structure.
+- Advanced sentiment (TextBlob): Sampled subset (≤5000) to compute polarity and subjectivity distribution (mean/median/std/min/max), providing an orthogonal view to the labeled classes.
+- Insights aggregation: A comprehensive insights report combines dataset overview, key findings (dominant sentiment, average tweet length, common themes), detailed analyses, and data-driven recommendations.
+
+Visualisation (visualizer.py)
+- Static charts (Matplotlib/Seaborn):
+  - Sentiment distribution: pie, bar, and percentage charts; text length by sentiment.
+  - Theme analysis: word cloud, top themes bar chart, climate-term frequencies, and a heatmap of themes by sentiment.
+  - Text patterns: histograms and box plots for length/word counts; bar chart for common patterns (RT/@/#/URLs).
+- Interactive dashboard (Plotly):
+  - Multi-panel view: sentiment pie, top themes bar, text length box plots by sentiment, and climate-term frequencies.
+  - Exported as interactive_dashboard.html for exploration and presentation.
+- Outputs saved to outputs/: sentiment_distribution.png, theme_analysis.png, text_patterns.png, interactive_dashboard.html.
+
+3) Discussion of findings and potential implications
+Findings (as surfaced by the pipeline outputs and insights report)
+- Sentiment distribution: The dataset spans four categories; the dominant sentiment is reported alongside percentages, revealing the balance among Anti, Neutral, Pro, and News tweets.
+- Themes: Frequently occurring terms highlight key topics in the climate conversation (policy, energy sources, weather events, emission/carbon discourse). Per-sentiment theme splits expose narrative differences across stances.
+- Text characteristics: Average/median lengths and word counts vary by sentiment; Anti/Pro messages may show different verbosity and structure compared to News/Neutral, with distinct usage of hashtags, mentions, and links.
+- Additional sentiment signal: TextBlob polarity/subjectivity stats on a representative sample provide corroborative trends about positivity and emotional tone.
+
+Implications for climate change social impact
+- Messaging strategy: If Neutral is large, campaigns should use more engaging hooks and clearer calls to action to move neutral audiences toward informed positions.
+- Counter-misinformation: Where Anti themes cluster, targeted myth-busting content can be tailored to the specific narratives and keywords prevalent in those segments.
+- Amplification: If Pro sentiment dominates, leverage ambassadors and community-driven content to broaden reach while maintaining credibility via News-aligned messaging.
+- Content design: Insights on length, hashtags, and link usage can guide format choices (e.g., concise posts with high-signal keywords vs. informative threads with credible sources).
+
+4) Challenges encountered and how they were overcome
+- Data noise and variability: Tweets contain slang, URLs, mentions, and hashtags. We mitigated noise via normalization, stop-word filtering, and punctuation removal for theme extraction, while preserving original text for context.
+- Duplicates and empty content: Deduplication by tweetid and removal of empty messages ensured cleaner distributions and reduced skew.
+- Scale and performance: With ~44K tweets, full-text NLP on the entire corpus could be slow. We used vectorized Pandas operations and sampled TextBlob analysis (≤5000) to balance fidelity and runtime.
+- Class imbalance and interpretability: The four sentiment labels capture different phenomena (stance vs. news). We report both numeric codes and human-readable labels, and present per-sentiment theme breakdowns and multiple visualization angles to aid interpretation.
+- Reproducibility and traceability: A structured pipeline, consistent feature engineering, and logging to timestamped files in logs/ improve auditability and facilitate debugging.
