@@ -1,4 +1,4 @@
-# Social Media Sentiment Analysis for Social Impact
+# Twitter Climate Change Sentiment Dataset Analysis
 
 ## Project Overview
 
@@ -107,7 +107,7 @@ outputs/
 ## Project Structure
 
 ```
-Project 1/
+Twitter Climate Change Sentiment Dataset/
 ├── twitter_sentiment_data.csv     # Input dataset
 ├── data_loader.py                # Data loading and preprocessing
 ├── sentiment_analyzer.py         # Sentiment analysis engine
