@@ -1,0 +1,35 @@
+================================================================================
+CLIMATE CHANGE SENTIMENT ANALYSIS REPORT
+================================================================================
+
+Generated on: 2025-09-04 22:30:35
+Dataset: twitter_sentiment_data.csv
+Total tweets analyzed: 43,943
+Date range: Apr 27, 2015 - Feb 21, 2018
+Topic: Climate Change
+
+KEY FINDINGS
+----------------------------------------
+Dominant sentiment: Pro
+Average tweet length: 122.8 characters
+Most common themes: climate, change, global, warming, trump
+
+SENTIMENT DISTRIBUTION
+----------------------------------------
+Pro: 22,962 tweets (9.08%)
+News: 9,276 tweets (17.56%)
+Neutral: 7,715 tweets (52.25%)
+Anti: 3,990 tweets (21.11%)
+
+RECOMMENDATIONS
+----------------------------------------
+1. Pro-climate change sentiment is dominant. Leverage this for broader engagement.
+2. Focus on key themes: climate, change, global, warming, trump
+
+DETAILED STATISTICS
+----------------------------------------
+Text length - Mean: 122.8, Median: 133.0
+Word count - Mean: 17.4, Median: 18.0
+
+================================================================================
+Report generation completed successfully.
