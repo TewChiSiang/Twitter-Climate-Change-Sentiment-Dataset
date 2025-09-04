@@ -116,7 +116,6 @@ Project 1/
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # This file
 ├── outputs/                      # Generated outputs (created after running)
-└── logs/                         # Analysis logs (created after running)
 ```
 
 ## Technical Implementation
